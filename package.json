@@ -1,0 +1,14 @@
+{
+  "name": "testing-by-examples",
+  "version": "0.0.0",
+  "repository": "git@github.com:Will956/testing-by-examples.git",
+  "author": "William Duplenne <will.dupl95@gmail.com>",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
+  },
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  },
+  "license": "MIT"
+}
