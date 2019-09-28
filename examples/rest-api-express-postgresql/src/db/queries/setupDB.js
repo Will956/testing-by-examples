@@ -6,8 +6,8 @@ const setupDB = async (pool, logger) => {
         firstName TEXT NOT NULL,
         lastName TEXT NOT NULL
       );
-      INSERT INTO users (firstName, lastName)
-      VALUES ('John', 'Doe'), ('Marie', 'Cross') 
+      INSERT INTO users (id, firstName, lastName)
+      VALUES (1, 'John', 'Doe'), (2, 'Marie', 'Cross') 
       ON CONFLICT DO NOTHING;
     `);
     logger.info('Table sucessfuly created');
