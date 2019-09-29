@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 
 import logger from './logger';
 import initDb from './db';
-import { setupDB, getUsers, getUserByUsername, createUser } from './db/queries';
+import { setupDB, getUsers, getUserByUsername, createUser, updateUser } from './db/queries';
 
 const app = express();
 const router = express.Router();
@@ -40,6 +40,11 @@ const server = async (app, router, port, logger, dbClient) => {
   router.post('/users', async (req, res) => {
     const results = await createUser(dbClient, req.body, logger);
     res.status(results.status).json({ ...results });
+  });
+
+  router.put('/users/:username', async (req, res) => {
+    const results = await updateUser(dbClient, req.params.username, req.body, logger);
+    res.status(results.status).json({ ...results });    
   });
 
   app.use('/api', router);
