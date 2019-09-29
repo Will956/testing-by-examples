@@ -1,17 +1,13 @@
-const getUsers = async (pool, response, logger) => {
+import { buildResponse, buildError } from '../../utils';
+
+const getUsers = async (pool, logger) => {
   try {
     const results = await pool.query('SELECT * FROM users ORDER BY id ASC');
-    response.status(200).json({
-      status: 200,
-      data: results.rows
-    });
-    logger.info('getUsers performed');
+    logger.info(`getUsers performed: ${JSON.stringify(results.rows, null, 2)}`);
+    return buildResponse(200, results.rows);
   } catch (err) {
-    response.status(500).json({
-      status: 500,
-      message: err.message
-    });
     logger.error(`Error during getUsers, ${err}`);
+    return buildError(500, err.message);
   }
 };
 
