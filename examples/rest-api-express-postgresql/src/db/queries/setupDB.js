@@ -6,10 +6,10 @@ const setupDB = async (pool, logger) => {
         id SERIAL PRIMARY KEY,
         firstName TEXT NOT NULL,
         lastName TEXT NOT NULL,
-        userName TEXT NOT NULL
+        userName TEXT NOT NULL UNIQUE
       );
-      INSERT INTO users (id, firstName, lastName, userName)
-      VALUES (1, 'John', 'Doe', 'JohnDoe45'), (2, 'Marie', 'Cross', 'Cross102') 
+      INSERT INTO users (firstName, lastName, userName)
+      VALUES ('John', 'Doe', 'JohnDoe45'), ('Marie', 'Cross', 'Cross102') 
       ON CONFLICT DO NOTHING;
     `);
     logger.info('Table sucessfuly created');

@@ -1,8 +1,9 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 
 import logger from './logger';
 import initDb from './db';
-import { setupDB, getUsers, getUserByUsername } from './db/queries';
+import { setupDB, getUsers, getUserByUsername, createUser } from './db/queries';
 
 const app = express();
 const router = express.Router();
@@ -11,6 +12,9 @@ const dbClient = initDb('localhost', 'api_db', 5432, 'admin', 'password');
 
 const server = async (app, router, port, logger, dbClient) => {
   await setupDB(dbClient, logger);
+
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
 
   router.use(function (req, res, next) {
     logger.info(`${req.method} on ${req.path}`);
@@ -26,6 +30,11 @@ const server = async (app, router, port, logger, dbClient) => {
 
   router.get('/users/:username', async (req, res) => {
     const results = await getUserByUsername(dbClient, req.params.username, logger);
+    res.status(results.status).json({ ...results });
+  });
+
+  router.post('/users', async (req, res) => {
+    const results = await createUser(dbClient, req.body, logger);
     res.status(results.status).json({ ...results });
   });
 
