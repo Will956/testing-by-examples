@@ -2,7 +2,7 @@ import express from 'express';
 
 import logger from './logger';
 import initDb from './db';
-import { setupDB, getUsers } from './db/queries';
+import { setupDB, getUsers, getUserByUsername } from './db/queries';
 
 const app = express();
 const router = express.Router();
@@ -21,6 +21,11 @@ const server = async (app, router, port, logger, dbClient) => {
 
   router.get('/users', async (req, res) => {
     const results = await getUsers(dbClient, logger);
+    res.status(results.status).json({ ...results });
+  });
+
+  router.get('/users/:username', async (req, res) => {
+    const results = await getUserByUsername(dbClient, req.params.username, logger);
     res.status(results.status).json({ ...results });
   });
 
