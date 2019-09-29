@@ -5,7 +5,7 @@ import { validateSchema } from '../../schema';
 
 const createUser = async (pool, body, logger) => {
   const { lastName, firstName, userName } = body;
-  
+
   try {
     if (!await validateSchema(body)) {
       return buildError(
@@ -25,7 +25,7 @@ const createUser = async (pool, body, logger) => {
     return buildResponse(201, results.rows);
   } catch (err) {
     logger.error(`Error during createUser, ${err}`);
-    if (R.prop('code', err)) return buildError(409, err.detail);
+    if (R.prop('code', err) === '23505') return buildError(409, err.detail);
     return buildError(500, err.message);
   }
 };

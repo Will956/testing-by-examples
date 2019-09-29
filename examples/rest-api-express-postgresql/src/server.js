@@ -15,6 +15,10 @@ const server = async (app, router, port, logger, dbClient) => {
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(async (err, req, res, next) => {
+    logger.error(`An error occured, ${err}`);
+    res.status(err.status).json({ 'status': err.status, 'message': err.message });
+  });
 
   router.use(function (req, res, next) {
     logger.info(`${req.method} on ${req.path}`);
