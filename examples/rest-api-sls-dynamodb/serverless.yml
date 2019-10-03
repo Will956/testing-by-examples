@@ -1,0 +1,19 @@
+service: rest-api-sls-dynamodb
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: eu-west-1
+  stage: development
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true

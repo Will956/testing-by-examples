@@ -1,0 +1,13 @@
+{
+  "name": "rest-api-sls-dynamodb",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "sls offline"
+  },
+  "dependencies": {
+    "serverless": "^1.53.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^5.12.0"
+  }
+}
