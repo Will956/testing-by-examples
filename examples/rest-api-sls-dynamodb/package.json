@@ -2,12 +2,14 @@
   "name": "rest-api-sls-dynamodb",
   "version": "0.0.0",
   "scripts": {
-    "dev": "sls offline"
+    "install:dynamodb": "sls dynamodb install",
+    "dev": "sls dynamodb start --migrate && sls offline"
   },
   "dependencies": {
     "serverless": "^1.53.0"
   },
   "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.38",
     "serverless-offline": "^5.12.0"
   }
 }

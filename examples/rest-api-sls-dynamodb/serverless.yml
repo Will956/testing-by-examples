@@ -1,19 +1,18 @@
 service: rest-api-sls-dynamodb
 
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
 
 provider:
   name: aws
   runtime: nodejs10.x
   region: eu-west-1
-  stage: development
+  stage: dev
+
+resources:
+  Resources:
+    dynamodb: ${file(./resources/dynamodb.yml)}
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /
-          method: get
-          cors: true
+  hello: ${file(./functions/hello.yml)}
