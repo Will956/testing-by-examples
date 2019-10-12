@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "author": "William Duplenne <will.dupl95@gmail.com>",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/server.js",
+    "build": "babel src --out-dir build",
+    "start": "node build/server.js"
   },
   "dependencies": {
     "ajv": "^6.10.2",

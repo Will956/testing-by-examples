@@ -54,7 +54,7 @@ const server = async (app, router, port, logger, dbClient) => {
 
   app.use('/api', router);
   
-  app.listen(port, () => logger.info(`Server launched on http://localhost:${port}`));
+  app.listen(port, () => logger.info(`Server launched on http://localhost:${port}/api`));
 };
 
 server(app, router, port, logger, dbClient);
