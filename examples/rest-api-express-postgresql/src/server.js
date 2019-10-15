@@ -8,7 +8,13 @@ import { setupDB, getUsers, getUserByUsername, createUser, updateUser, deleteUse
 const app = express();
 const router = express.Router();
 const port = 3000;
-const dbClient = initDb('localhost', 'api_db', 5432, 'admin', 'password');
+
+let dbClient;
+if (process.env.NODE_ENV !== 'production') {
+  dbClient = initDb('localhost', 'api_db', 5432, 'admin', 'password');
+} else {
+  dbClient = initDb('postgres', 'api_db', 5432, 'admin', 'password');
+}
 
 const server = async (app, router, port, logger, dbClient) => {
   await setupDB(dbClient, logger);

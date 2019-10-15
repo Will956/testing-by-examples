@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir build",
-    "start": "node build/server.js"
+    "start": "NODE_ENV='production' node build/server.js"
   },
   "dependencies": {
     "ajv": "^6.10.2",
